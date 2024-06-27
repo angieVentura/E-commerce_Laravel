@@ -29,14 +29,8 @@ class CategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CategoryRequest $request)
     {
-
-        $request->validate([
-            'parent_id' => 'required|integer|min:1',
-            'name' => 'required|string|min:5|max:100',
-        ]);
-
         Category::create($request->all());
 
         return redirect()->route('categories.index');
@@ -62,13 +56,8 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Category $category)
+    public function update(CategoryRequest $request, Category $category)
     {
-        $request->validate([
-            'parent_id' => 'required|integer',
-            'name' => 'required|string|min:5|max:100',
-        ]);
-
         $category->update($request->all());
 
         return redirect()->route('categories.index');
